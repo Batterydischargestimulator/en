@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080b16"><title>Battery Wars — Survive the Drain</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Orbitron:wght@500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="ambient ambient-a"></div><div class="ambient ambient-b"></div>
+<header class="topbar"><a class="brand" href="#"><span class="brand-icon">ϟ</span><span>BATTERY<span class="brand-accent">WARS</span></span></a><div class="top-meta"><span class="live-dot"></span> SIMULATION ONLINE <span class="version">v1.0</span></div><button id="soundToggle" class="icon-btn" aria-label="Toggle sound">♫ <span>Sound off</span></button></header>
+<main>
+<section class="hero"><div class="eyebrow"><span class="eyebrow-line"></span> THE ULTIMATE POWER CHALLENGE <span class="eyebrow-line"></span></div><h1>HOW LONG CAN<br>YOU <span>SURVIVE?</span></h1><p class="hero-copy">Your battery is your lifeline. Make every milliamp count.</p><div class="hero-stats"><div><strong>5000</strong><small>mAh CAPACITY</small></div><i></i><div><strong>3</strong><small>DISCHARGE MODELS</small></div><i></i><div><strong>∞</strong><small>WAYS TO DRAIN</small></div></div></section>
+<nav class="tabs" aria-label="Game sections"><button class="tab active" data-tab="survival">01 / SURVIVAL MODE</button><button class="tab" data-tab="lab">02 / SCIENCE LAB</button><button class="tab" data-tab="missions">03 / MISSIONS</button></nav>
+<section id="survival" class="panel active">
+<div class="section-heading"><div><div class="kicker">LIVE SIMULATION</div><h2>Battery survival</h2></div><div class="status-pill"><span class="live-dot"></span> LIVE</div></div>
+<div class="game-grid">
+<article class="card battery-card"><div class="card-top"><span>YOUR POWER CORE</span><span id="statusText" class="status-text">SYSTEM STABLE</span></div>
+<div class="battery-wrap"><div class="battery-cap"></div><div class="battery-shell"><div id="batteryFill" class="battery-fill"></div><div class="battery-gloss"></div><div class="battery-center"><div id="batteryPercent" class="battery-percent">100<span>%</span></div><div class="battery-label">ENERGY REMAINING</div></div></div></div>
+<div class="charge-row"><span>0%</span><span>CHARGE LEVEL</span><span>100%</span></div><div class="meter"><div id="meterFill"></div></div>
+<div class="readouts"><div><small>CAPACITY LEFT</small><strong id="mahLeft">5000 <em>mAh</em></strong></div><div><small>TIME ELAPSED</small><strong id="elapsed">00:00 <em>hrs</em></strong></div><div><small>EST. TIME LEFT</small><strong id="timeLeft">10.00 <em>hrs</em></strong></div></div>
+<div class="controls"><button id="startBtn" class="btn btn-primary">▶ START SURVIVAL</button><button id="resetBtn" class="btn btn-ghost">↻ RESET</button></div>
+<div class="hint">Tip: switch off power-hungry apps to stay alive longer.</div></article>
+<article class="card control-card"><div class="card-top"><span>LOADOUT / APP DRAIN</span><span class="mono">5000 mAh CELL</span></div><p class="muted">Choose what your phone is doing. Each app adds a current draw.</p>
+<div class="app-list">
+<label class="app-option"><input type="checkbox" data-current="180" data-app="Screen"><span class="app-icon">☀</span><span class="app-name">Screen on<small>Display active</small></span><b>180 <small>mA</small></b></label>
+<label class="app-option"><input type="checkbox" data-current="220" data-app="Video"><span class="app-icon">▶</span><span class="app-name">Video streaming<small>HD playback</small></span><b>220 <small>mA</small></b></label>
+<label class="app-option"><input type="checkbox" data-current="420" data-app="Games"><span class="app-icon">⌘</span><span class="app-name">Gaming<small>High performance</small></span><b>420 <small>mA</small></b></label>
+<label class="app-option"><input type="checkbox" data-current="200" data-app="GPS"><span class="app-icon">⌖</span><span class="app-name">Maps / GPS<small>Location tracking</small></span><b>200 <small>mA</small></b></label>
+<label class="app-option"><input type="checkbox" data-current="220" data-app="Hotspot"><span class="app-icon">◉</span><span class="app-name">Hotspot<small>Sharing connection</small></span><b>220 <small>mA</small></b></label>
+<label class="app-option"><input type="checkbox" data-current="40" data-app="Music"><span class="app-icon">♫</span><span class="app-name">Music<small>Background audio</small></span><b>40 <small>mA</small></b></label>
+</div>
+<div class="load-total"><span>TOTAL CURRENT DRAW</span><strong id="currentTotal">35 <small>mA</small></strong></div><div class="powerups"><div><b>⚡ POWER-UPS</b><small>Use a boost to save your run</small></div><button id="saverBtn" class="boost-btn">♧ BATTERY SAVER <span>OFF</span></button></div>
+<div class="model-select"><label for="modelSelect">DISCHARGE MODEL</label><select id="modelSelect"><option value="constant">Constant current</option><option value="exponential">Exponential decay</option></select></div>
+</article></div>
+<div class="card chart-card"><div class="card-top"><div><span>ENERGY TELEMETRY</span><h3>Battery over time</h3></div><span class="chart-legend"><i></i> YOUR BATTERY</span></div><canvas id="batteryChart" height="180" aria-label="Battery charge over time chart"></canvas><div class="chart-foot"><span>0 HRS</span><span>TIME →</span><span>24 HRS</span></div></div>
+</section>
+<section id="lab" class="panel">
+<div class="section-heading"><div><div class="kicker">LEARN BY EXPERIMENTING</div><h2>Science lab</h2></div><span class="lab-tag">MATH INSIDE THE MACHINE</span></div>
+<div class="model-grid">
+<article class="card model-card"><div class="model-number">MODEL 01</div><div class="model-icon">⌁</div><h3>Exponential decay</h3><p>Drain rate depends on how much charge remains. Starts fast, then slows down.</p><div class="equation">Q(t) = Q₀ e<sup>−kt</sup></div><label>Decay constant <b id="kValue">0.15 / hr</b></label><input id="kSlider" type="range" min=".05" max=".5" step=".01" value=".15"><div class="model-result">20% charge after <strong id="expTime">10.73 h</strong></div></article>
+<article class="card model-card"><div class="model-number">MODEL 02</div><div class="model-icon">↘</div><h3>Constant current</h3><p>Same current draw all the time. The charge drops in a straight line.</p><div class="equation">Q(t) = Q₀ − It</div><label>Current draw <b id="iValue">500 mA</b></label><input id="iSlider" type="range" min="100" max="1000" step="25" value="500"><div class="model-result">Empty after <strong id="linTime">10.00 h</strong></div></article>
+<article class="card model-card"><div class="model-number">MODEL 03</div><div class="model-icon">⌁</div><h3>RC discharge</h3><p>A capacitor discharges through a resistor. Voltage falls exponentially.</p><div class="equation">V(t) = V₀ e<sup>−t/RC</sup></div><div class="rc-values"><span>R <b>10 Ω</b></span><span>C <b>10 F</b></span><span>V₀ <b>4.2 V</b></span></div><div class="model-result">To reach 3.0 V <strong>33.65 s</strong></div></article>
+</div>
+<div class="card experiment-card"><div class="card-top"><span>EXPERIMENT CONSOLE</span><span class="mono">MODEL COMPARISON</span></div><h3>Watch the models compete</h3><p class="muted">Compare two ways a 5000 mAh battery can drain. Move the time slider and inspect the predicted charge.</p><div class="compare-controls"><label>TIME <strong id="compareHour">5.0 hours</strong><input id="timeSlider" type="range" min="0" max="24" step=".5" value="5"></label></div><canvas id="compareChart" height="190"></canvas><div class="compare-results"><div><small>EXPONENTIAL</small><strong id="expCharge">2361.8 mAh</strong></div><div><small>CONSTANT CURRENT</small><strong id="linCharge">2500 mAh</strong></div></div></div>
+<div class="formula-note"><span>∑</span><div><b>Why differential equations?</b><p>The derivative dQ/dt tells us the rate at which battery charge changes. A negative derivative means the battery is losing charge. Integration helps us find the total charge remaining over time.</p></div></div>
+</section>
+<section id="missions" class="panel">
+<div class="section-heading"><div><div class="kicker">PROVE YOUR SKILLS</div><h2>Mission control</h2></div><div class="xp-pill">✦ <span id="xpCount">0</span> XP</div></div>
+<div class="mission-banner"><div><div class="kicker">DAILY OBJECTIVE</div><h3>THE LAST 20%</h3><p>Can you make your battery reach the final 20% without giving up?</p><span class="reward">REWARD +250 XP</span></div><div class="mission-art">🔋</div></div>
+<div class="mission-list">
+<article class="card mission"><div class="mission-symbol">🛡️</div><div class="mission-info"><span class="difficulty easy">EASY</span><h3>Power saver rookie</h3><p>Activate Battery Saver and start a survival run.</p><small>+100 XP</small></div><button class="mission-action" data-mission="saver">START</button></article>
+<article class="card mission"><div class="mission-symbol">⏱️</div><div class="mission-info"><span class="difficulty medium">MEDIUM</span><h3>Time bender</h3><p>Reach 20% charge in the exponential model.</p><small>+250 XP</small></div><button class="mission-action" data-mission="twenty">START</button></article>
+<article class="card mission"><div class="mission-symbol">🧠</div><div class="mission-info"><span class="difficulty hard">HARD</span><h3>Math engineer</h3><p>Open the Science Lab and compare both models.</p><small>+150 XP</small></div><button class="mission-action" data-mission="lab">START</button></article>
+</div>
+<div class="card quiz-card"><div class="kicker">KNOWLEDGE CHECK</div><h3>Quick-fire challenge</h3><p id="quizQuestion">In the equation dQ/dt = −I, what does I represent?</p><div id="quizAnswers" class="quiz-answers"><button data-answer="wrong">Battery capacity</button><button data-answer="correct">Constant current draw</button><button data-answer="wrong">Time elapsed</button></div><div id="quizFeedback" class="quiz-feedback" aria-live="polite"></div></div>
+</section>
+<footer><div class="brand"><span class="brand-icon">ϟ</span><span>BATTERY<span class="brand-accent">WARS</span></span></div><p>BUILT TO MAKE MATHS FEEL LIKE PLAY. <span>LEARN THE SCIENCE. OWN THE POWER.</span></p><small>Educational simulation · Assumed values, not real phone measurements</small></footer>
+</main>
+<div id="toast" class="toast" role="status"></div>
+<script src="app.js"></script>
+</body></html>
